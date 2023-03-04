@@ -14,7 +14,9 @@ class Person(Document):
 
 	def validate(self):
 		# self.create_document()
-		self.load_document()
+		# self.load_document()
+		# self.last_doc()
+		self.create_new_doc()
 
 
 
@@ -32,3 +34,20 @@ class Person(Document):
 		doc = frappe.get_doc('Library Member', 'MEM00001')
 		frappe.msgprint(doc.owner)
 		
+	# frappe.get_last_doc
+	#Returns the last Document object created under the mentioned doctype.
+	# get the last Task created
+	def last_doc(self):
+		doc = frappe.get_last_doc('Articles', order_by="creation asc")
+		frappe.msgprint(doc.name)
+
+	# frappe.new_doc
+	# Alternative way to create a new Document.
+	def create_new_doc(self):
+		doc = frappe.new_doc('Articles')
+		doc.article_name = 'Harry Potter Series'
+		doc.author = 'J.K. Rowling'
+		doc.status = 'Available'
+		doc.insert()
+
+
